@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OracleNotes", "OracleNotes\OracleNotes.csproj", "{E9869531-75A4-403A-8BDB-F19394122D70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E9869531-75A4-403A-8BDB-F19394122D70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9869531-75A4-403A-8BDB-F19394122D70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9869531-75A4-403A-8BDB-F19394122D70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9869531-75A4-403A-8BDB-F19394122D70}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D06E3389-4BB4-4217-B951-7F46CB31F71B}
+	EndGlobalSection
+EndGlobal
