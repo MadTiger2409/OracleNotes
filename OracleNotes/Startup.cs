@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OracleNotes.Data.Database;
+using Oracle.EntityFrameworkCore;
 
 namespace OracleNotes
 {
@@ -31,8 +29,12 @@ namespace OracleNotes
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            #region DatabaseSettings
+            //services.AddDbContext<NoteContext>(options => options.UseSqlServer(@"Server=(LocalDb)\\MSSQLLocalDB;Database=OracleNotes;Trusted_Connection=True;"));
+            services.AddDbContext<NoteContext>(options => options.UseOracle(@"Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=155.158.112.45)  (PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=oltpstud)));User Id=msbd19;Password=haslo2018; "));
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
