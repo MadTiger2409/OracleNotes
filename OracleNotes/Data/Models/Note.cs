@@ -10,5 +10,13 @@ namespace OracleNotes.Data.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
+
+        public Note() { }
+
+        public Note(string title, string text)
+        {
+            Title = title;
+            Text = text;
+        }
     }
 }

@@ -4,34 +4,39 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OracleNotes.Data.Commands.Note;
+using OracleNotes.Data.Services.Interfaces;
+using OracleNotes.Extensions.Exceptions;
 using OracleNotes.Models;
 
 namespace OracleNotes.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly INoteService _noteService;
+
+        public HomeController(INoteService noteService)
+        {
+            _noteService = noteService;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult About()
+        [HttpPost]
+        public async Task<IActionResult> Index(CreateNoteCommand command)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            try
+            {
+                await _noteService.AddAsync(command);
+                return View();
+            }
+            catch (InternalSystemException ex)
+            {
+                return View();
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -20,6 +20,10 @@ namespace OracleNotes.Data.Database
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            modelBuilder.Entity<Note>()
+                .Property(x => x.Id)
+                .ValueGeneratedOnAdd();
         }
     }
 }

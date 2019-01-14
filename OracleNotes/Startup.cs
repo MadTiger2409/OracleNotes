@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OracleNotes.Data.Database;
 using Oracle.EntityFrameworkCore;
+using OracleNotes.Data.Services.Interfaces;
+using OracleNotes.Data.Services;
 
 namespace OracleNotes
 {
@@ -34,6 +36,10 @@ namespace OracleNotes
             #region DatabaseSettings
             //services.AddDbContext<NoteContext>(options => options.UseSqlServer(@"Server=(LocalDb)\\MSSQLLocalDB;Database=OracleNotes;Trusted_Connection=True;"));
             services.AddDbContext<NoteContext>(options => options.UseOracle(@"Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=155.158.112.45)  (PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=oltpstud)));User Id=msbd19;Password=haslo2018; "));
+            #endregion
+
+            #region Services
+            services.AddScoped<INoteService, NoteService>();
             #endregion
         }
 
