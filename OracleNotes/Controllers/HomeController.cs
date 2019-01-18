@@ -39,6 +39,14 @@ namespace OracleNotes.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult List()
+        {
+            var notes = _noteService.GetAll();
+
+            return View(notes);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

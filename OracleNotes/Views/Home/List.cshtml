@@ -1,0 +1,12 @@
+﻿@model IEnumerable<OracleNotes.Data.Models.DbQueries.NoteQuery>
+
+@if (Model.Any())
+{
+    foreach (var note in Model)
+    {
+        <div>
+            <p>@note.Title</p>
+            <p>@note.Text</p>
+        </div>
+    }
+}
