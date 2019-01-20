@@ -1,22 +1,38 @@
 ﻿@model OracleNotes.Data.Commands.Note.CreateNoteCommand
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles{ 
+    <link rel="stylesheet" href="~/css/views/index.css" />
 }
 
-<form asp-controller="Home" asp-action="Index" method="post">
-    <label for="title">Title:</label>
-    @Html.TextBoxFor(model => model.Title, new
-{
-    @Id = "title",
-    @Type = "text",
-    @Required = "true"
-})
-    <label for="text">Text:</label>
-    @Html.TextAreaFor(model => model.Text, new
-{
-    @Id = "text",
-    @Required = "true"
-})
-    <button type="submit">Send</button>
-</form>
+<div class="card border-secondary mb-3 bg-dark">
+    <div class="card-body">
+        <h5 class="card-title">Add note</h5>
+        <hr>
+        <form asp-controller="Home" asp-action="Index" method="post">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                @Html.TextBoxFor(model => model.Title, new
+            {
+                @Id = "title",
+                @Type = "text",
+                @Class = "form-control",
+                @Required = "true"
+            })
+            </div>
+            <div class="form-group">
+                <label for="text">Text:</label>
+                @Html.TextAreaFor(model => model.Text, new
+           {
+               @Id = "text",
+               @Class = "form-control", 
+               @Required = "true"
+           })
+            </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+    </div>
+</div>

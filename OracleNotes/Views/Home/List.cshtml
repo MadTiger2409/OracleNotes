@@ -1,12 +1,54 @@
-﻿@model IEnumerable<OracleNotes.Data.Models.DbQueries.NoteQuery>
+﻿@model IEnumerable<OracleNotes.Data.Models.Note>
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles{
+    <link rel="stylesheet" href="~/css/views/index.css" />
+}
 
 @if (Model.Any())
 {
-    foreach (var note in Model)
-    {
-        <div>
-            <p>@note.Title</p>
-            <p>@note.Text</p>
+    int index = 1;
+    <div class="card border-secondary mb-3 bg-dark">
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Text</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var note in Model)
+                    {
+                        <tr>
+                            <th scope="row">@index</th>
+                            <td>@note.Title</td>
+                            <td>@note.Text</td>
+                            <td>
+                                <form asp-action="Delete" asp-controller="Home" method="post">
+                                    <input type="number" value="@note.Id" name="Id" id="Id" hidden />
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        index++;
+                    }
+                </tbody>
+            </table>
         </div>
-    }
+    </div>
+}
+else
+{
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Notes</h5>
+            <p class="card-text">There isn't any note at this moment.</p>
+            <a asp-action="Index" asp-controller="Home" class="card-link">Back</a>
+        </div>
+    </div>
 }

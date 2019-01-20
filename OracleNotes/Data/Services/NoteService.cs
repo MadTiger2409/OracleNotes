@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Oracle.ManagedDataAccess.Client;
 using OracleNotes.Data.Commands.Note;
 using OracleNotes.Data.Database;
-using OracleNotes.Data.Models.DbQueries;
+using OracleNotes.Data.Models;
 using OracleNotes.Data.Services.Interfaces;
 using OracleNotes.Extensions.Exceptions;
 
@@ -32,7 +32,18 @@ namespace OracleNotes.Data.Services
             await _context.Database.ExecuteSqlCommandAsync(query);
         }
 
-        public IEnumerable<NoteQuery> GetAll()
-            => _context.NotesQuery.FromSql($"SELECT \"Title\", \"Text\" FROM \"Notes\";").AsEnumerable();
+        public async Task DeleteAsync(int id)
+        {
+            if (id <=0)
+            {
+                throw new InternalSystemException("Id must be greater than zero.");
+            }
+
+            var query = $"DELETE FROM \"Notes\" WHERE \"Id\" = {id};";
+            await _context.Database.ExecuteSqlCommandAsync(query);
+        }
+
+        public IEnumerable<Note> GetAll()
+            => _context.Notes.FromSql($"SELECT \"Id\", \"Title\", \"Text\" FROM \"Notes\";").AsEnumerable();
     }
 }

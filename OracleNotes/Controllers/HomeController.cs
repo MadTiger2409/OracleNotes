@@ -31,7 +31,7 @@ namespace OracleNotes.Controllers
             try
             {
                 await _noteService.AddAsync(command);
-                return View();
+                return RedirectToAction("List", "Home");
             }
             catch (InternalSystemException ex)
             {
@@ -39,12 +39,26 @@ namespace OracleNotes.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("List")]
         public IActionResult List()
         {
             var notes = _noteService.GetAll();
 
             return View(notes);
+        }
+
+        [HttpPost("Delete")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _noteService.DeleteAsync(id);
+                return RedirectToAction("List", "Home");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("List", "Home");
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

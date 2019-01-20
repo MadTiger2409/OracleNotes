@@ -1,0 +1,18 @@
+﻿.card {
+    margin: 10px 4% 10px 4%;
+    color: white;
+}
+
+.alert {
+    margin: 10px 0 10px 0;
+}
+
+.form-control {
+    background: #6e8596;
+    border-color: dimgray;
+}
+
+.btn-primary {
+    background: #305E82;
+    border-color: #3b698c;
+}
