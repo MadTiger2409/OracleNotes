@@ -9,8 +9,10 @@ namespace OracleNotes.Data.Services.Interfaces
 {
     public interface INoteService
     {
-        Task AddAsync(CreateNoteCommand command);
         IEnumerable<Note> GetAll();
+        Note Get(int id);
+        Task AddAsync(CreateNoteCommand command);
         Task DeleteAsync(int id);
+        Task UpdateAsync(Note note);
     }
 }

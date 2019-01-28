@@ -18,7 +18,8 @@
                         <th scope="col">#</th>
                         <th scope="col">Title</th>
                         <th scope="col">Text</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +29,9 @@
                             <th scope="row">@index</th>
                             <td>@note.Title</td>
                             <td>@note.Text</td>
+                            <td>
+                                <a href="@Url.Action("Edit", "Home")/@note.Id" class="btn btn-success">Edit</a>
+                            </td>
                             <td>
                                 <form asp-action="Delete" asp-controller="Home" method="post">
                                     <input type="number" value="@note.Id" name="Id" id="Id" hidden />

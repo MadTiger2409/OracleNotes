@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OracleNotes.Data.Commands.Note;
+using OracleNotes.Data.Models;
 using OracleNotes.Data.Services.Interfaces;
 using OracleNotes.Extensions.Exceptions;
 using OracleNotes.Models;
@@ -53,6 +54,34 @@ namespace OracleNotes.Controllers
             try
             {
                 await _noteService.DeleteAsync(id);
+                return RedirectToAction("List", "Home");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("List", "Home");
+            }
+        }
+
+        [HttpGet("Edit/{id}")]
+        public IActionResult Edit(int id)
+        {
+            //try
+            //{
+                var note = _noteService.Get(id);
+                return View(note);
+            //}
+            //catch (Exception)
+            //{
+            //    return RedirectToAction("List", "Home");
+            //}
+        }
+
+        [HttpPost("Edit")]
+        public async Task<IActionResult> Edit(Note note)
+        {
+            try
+            {
+                await _noteService.UpdateAsync(note);
                 return RedirectToAction("List", "Home");
             }
             catch (Exception)

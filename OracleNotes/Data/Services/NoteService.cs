@@ -43,7 +43,26 @@ namespace OracleNotes.Data.Services
             await _context.Database.ExecuteSqlCommandAsync(query);
         }
 
+        public Note Get(int id)
+        {
+            var query = $"SELECT * FROM \"Notes\" WHERE \"Id\" = {id};";
+            var queryResoult = _context.Notes.FromSql(query).AsEnumerable();
+
+            return queryResoult.SingleOrDefault();
+        }
+
         public IEnumerable<Note> GetAll()
             => _context.Notes.FromSql($"SELECT \"Id\", \"Title\", \"Text\" FROM \"Notes\";").AsEnumerable();
+
+        public async Task UpdateAsync(Note note)
+        {
+            if (note == null)
+            {
+                throw new InternalSystemException("Something went wrong.");
+            }
+
+            var query = $"UPDATE \"Notes\" SET \"Title\" = '{note.Title}', \"Text\" = '{note.Text}' WHERE \"Id\" = {note.Id};";
+            await _context.Database.ExecuteSqlCommandAsync(query);
+        }
     }
 }
